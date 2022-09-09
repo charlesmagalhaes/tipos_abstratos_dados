@@ -46,8 +46,16 @@ public class Main {
 
 						String numeroAgencia = ler.nextLine();
 						
-						System.out.print("Digite o numero da conta: ");		
-						int numeroConta = ler.nextInt();
+						try {
+							
+							System.out.print("Digite o numero da conta: ");		
+							int numeroConta = ler.nextInt();
+							
+						} catch (Exception e) {
+							System.out.println("Erro: "+e);
+							break;
+						}
+						
 						
 						ler.nextLine();
 						System.out.print("Digite o nome do titular da conta: ");
@@ -84,6 +92,8 @@ public class Main {
 							
 						}else {
 							System.out.println("Não é possível criar mais contas. Entre em contato com suporte.");
+							System.out.print("clique na tecla p, após enter para prosseguir: ");
+							ler.next();
 							opcaoCriarConta = 'n';
 							
 							System.out.println("---------------------------------------------------------------------");
