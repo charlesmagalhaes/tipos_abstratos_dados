@@ -46,17 +46,19 @@ public class Main {
 
 						String numeroAgencia = ler.nextLine();
 						
+						int numeroConta = 0;
+
 						try {
-							
+								
 							System.out.print("Digite o numero da conta: ");		
-							int numeroConta = ler.nextInt();
-							
+							numeroConta = ler.nextInt();
+								
 						} catch (Exception e) {
-							System.out.println("Erro: "+e);
-							break;
+								// TODO: handle exception
+							System.out.println("Erro: Esse campo só aceita numeros. "+e.toString());
+							
 						}
-						
-						
+														
 						ler.nextLine();
 						System.out.print("Digite o nome do titular da conta: ");
 						String nomeCliente = ler.nextLine();
