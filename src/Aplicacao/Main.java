@@ -60,6 +60,7 @@ public class Main {
 							System.out.println("Voltando ao menu principal");
 							System.out.println("---------------------------------------------------------------------");
 							ler.next();
+							System.out.print("clique na tecla p, após enter para prosseguir: ");
 							ler.next();
 							break;
 							
