@@ -18,6 +18,14 @@ public class TContaBancaria {
 		
 	}
 
+	public TContaBancaria(TContaBancaria conta) {
+		this.nomeCliente = conta.nomeCliente;
+		this.CPF = conta.CPF;
+		this.numeroConta = conta.numeroConta;
+		this.agencia = conta.agencia;	
+		this.saldo = conta.saldo;
+	}
+
 	public String getNomeCliente() {
 		return nomeCliente;
 	}

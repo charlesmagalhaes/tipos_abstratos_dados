@@ -10,16 +10,27 @@ public class Banco {
 	
 	public boolean criarConta(TContaBancaria conta){
 		if(qtdItens+1 <= capacidade) {
-			listaContas[qtdItens] = new TContaBancaria(conta.getNomeCliente(), 
-													conta.getCPF(), 
-													conta.getNumeroConta(), 
-													conta.getAgencia(),
-													conta.getSaldo());
+			listaContas[qtdItens] = new TContaBancaria(conta);
 		qtdItens += 1;
-		return true;
 		} 
 		
-		return false;
+		aumentarCapacidadeArray();
+		
+		listaContas[qtdItens] = new TContaBancaria(conta);
+		qtdItens += 1;
+		
+		return true;
+	}
+
+	private void aumentarCapacidadeArray() {
+		capacidade +=1;
+		
+		TContaBancaria[] listaTemporaria = listaContas;
+		listaContas = new TContaBancaria[capacidade];
+		
+		for (int i=0; i< listaTemporaria.length;i++) {
+			listaContas[i] = listaTemporaria[i];
+		}
 	}
 	
 	public void imprimirListaContas() {
