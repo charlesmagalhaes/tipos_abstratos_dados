@@ -20,7 +20,8 @@ public class Main {
 		char opcaoMenuPrincipal = 's';
 		do {
 			
-			System.out.println("------------------------ Banco MagalhaesBank--------------------------");
+			System.out.println("------------------------ Banco MagalhaesBank---------------------------");
+			System.out.println();
 			System.out.println("---------------------MENU PRINCIPAL------------------------------------");
 			System.out.println("1: Criar conta");
 			System.out.println("2: Movimentação de contas: Sacar,Depositar,transferir e ver saldo");
