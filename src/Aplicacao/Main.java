@@ -55,7 +55,13 @@ public class Main {
 								
 						} catch (Exception e) {
 								// TODO: handle exception
-							System.out.println("Erro: Esse campo só aceita numeros. "+e.toString());
+							System.out.println("---------------------------------------------------------------------");
+							System.out.println("Erro: Esse campo só aceita numeros. Erro interno: "+e.toString());
+							System.out.println("Voltando ao menu principal");
+							System.out.println("---------------------------------------------------------------------");
+							ler.next();
+							ler.next();
+							break;
 							
 						}
 														
@@ -136,9 +142,7 @@ public class Main {
 								   switch (opcaoMovimentacoes) {
 								   
 										case 1: 
-											System.out.print("Digite o valor a ser depositado: ");
-											double valorParaDeposito = ler.nextDouble();
-											contaEncontrada.deposito(valorParaDeposito);
+									solicitaValorDeposito(ler, contaEncontrada);
 											
 											break;
 										case 2: 
@@ -210,11 +214,17 @@ public class Main {
 	
 		
 		System.out.println();
-		System.out.println("-----------------Fim do programa---------------------------");
+		System.out.println("--------------------------Fim do programa----------------------------------");
 				
 		ler.close();
 		
 
+	}
+
+	private static void solicitaValorDeposito(Scanner ler, TContaBancaria contaEncontrada) {
+		System.out.print("Digite o valor a ser depositado: ");
+		double valorParaDeposito = ler.nextDouble();
+		contaEncontrada.deposito(valorParaDeposito);
 	}
 
 }
