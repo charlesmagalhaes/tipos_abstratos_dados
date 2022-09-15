@@ -7,7 +7,7 @@
 ## Tecnologia envolvida
 1.	Eclipse IDE for Enterprise;
 2.	Linguagem Java;
-Como "startar" a aplicação
+## Como "startar" a aplicação
 1.	Clonar o projeto no diretório de sua preferência;
 2.	Abrir o Eclipse IDE for Enterprise e importar a aplicação;
 3.	Após clicar em "Run" para "startar" a aplicação.
