@@ -38,6 +38,7 @@ public class Main {
 			   
 				case 1: 
 					char opcaoCriarConta = 'n';
+					aa:
 					do {
 						System.out.println("Insira os dados abaixo solicitados para criar a conta: ");
 						
@@ -48,24 +49,37 @@ public class Main {
 						String numeroAgencia = ler.nextLine();
 						
 						int numeroConta = 0;
-
-						try {
+						
+						boolean lerDadoNovamente = true;
+						
+						while(lerDadoNovamente) {
+							
+							try {
 								
-							System.out.print("Digite o numero da conta: ");		
-							numeroConta = ler.nextInt();
+								System.out.print("Digite o numero da conta: ");		
+								numeroConta = ler.nextInt();
+									
+							} catch (Exception e) {
+									
+								System.out.println("---------------------------------------------------------------------");
+								System.out.println("Erro: Esse campo só aceita numeros. Erro interno: "+e.toString());
+								System.out.println("Voltando ao menu principal...");
+								System.out.println("---------------------------------------------------------------------");
+								ler.next();
+								System.out.print("clique na tecla p, após enter para prosseguir: ");
+								ler.next();
+								break aa;
 								
-						} catch (Exception e) {
-								// TODO: handle exception
-							System.out.println("---------------------------------------------------------------------");
-							System.out.println("Erro: Esse campo só aceita numeros. Erro interno: "+e.toString());
-							System.out.println("Voltando ao menu principal");
-							System.out.println("---------------------------------------------------------------------");
-							ler.next();
-							System.out.print("clique na tecla p, após enter para prosseguir: ");
-							ler.next();
-							break;
+							}
+							
+							if(listaContas.procurarConta(numeroConta) == null) {
+								lerDadoNovamente = false;
+							}else {
+								System.out.println("Esse numero de conta já existe. Digite outro numero de conta.");
+							}
 							
 						}
+
 														
 						ler.nextLine();
 						System.out.print("Digite o nome do titular da conta: ");
@@ -83,14 +97,10 @@ public class Main {
 						if(contaCriada == true) { 
 							System.out.println("-----------------------------------------------------------------");
 							System.out.println("Conta criada com sucesso!!!");
+							System.out.println(conta);
 							}
 						
 						System.out.println("---------------------------------------------------------------------");
-						
-						
-						System.out.println("Conta(s) criada(s): ");			
-						
-						listaContas.imprimirListaContas();
 						
 						System.out.println("---------------------------------------------------------------------");
 						

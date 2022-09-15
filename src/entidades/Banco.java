@@ -12,6 +12,7 @@ public class Banco {
 		if(qtdItens+1 <= capacidade) {
 			listaContas[qtdItens] = new TContaBancaria(conta);
 		qtdItens += 1;
+		return true;
 		} 
 		
 		aumentarCapacidadeArray();
