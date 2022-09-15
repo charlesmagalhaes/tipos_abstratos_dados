@@ -20,20 +20,12 @@ public class Main {
 		char opcaoMenuPrincipal = 's';
 		do {
 			
-			System.out.println("------------------------ Banco MagalhaesBank---------------------------");
-			System.out.println();
-			System.out.println("---------------------MENU PRINCIPAL------------------------------------");
-			System.out.println("1: Criar conta");
-			System.out.println("2: Movimentação de contas: Sacar,Depositar,transferir e ver saldo");
-			System.out.println("3: Gerar Relatório geral das contas");
-			System.out.println("4: Finalizar programa");
-			System.out.println();
-			System.out.println("----------------------------------------------------------------------------");
+			layouMenuPrincipal();
 			
 			System.out.print("Digite uma das opções acima: ");
 			int escolherOpcao = ler.nextInt();
 			ler.nextLine();
-			System.out.println("----------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------");
 			 switch (escolherOpcao) {
 			   
 				case 1: 
@@ -43,10 +35,8 @@ public class Main {
 						System.out.println("Insira os dados abaixo solicitados para criar a conta: ");
 						
 						System.out.println();
-						
-						System.out.print("Digite o numero da Agência: ");	
 
-						String numeroAgencia = ler.nextLine();
+						String numeroAgencia = lerDadosUsuarioString(ler, "Digite o numero da Agência: ");
 						
 						int numeroConta = 0;
 						
@@ -56,8 +46,7 @@ public class Main {
 							
 							try {
 								
-								System.out.print("Digite o numero da conta: ");		
-								numeroConta = ler.nextInt();
+								numeroConta = lerDadosUsuarioInt(ler, "Digite o numero da conta: ");
 									
 							} catch (Exception e) {
 									
@@ -82,11 +71,10 @@ public class Main {
 
 														
 						ler.nextLine();
-						System.out.print("Digite o nome do titular da conta: ");
-						String nomeCliente = ler.nextLine();
+					
+						String nomeCliente = lerDadosUsuarioString(ler, "Digite o nome do titular da conta: ");
 						
-						System.out.print("Digite o CPF: ");
-						String CPF = ler.nextLine();
+						String CPF = lerDadosUsuarioString(ler, "Digite o CPF: ");
 					
 							
 						System.out.print("Digite o valor inicial do deposito: ");
@@ -95,12 +83,10 @@ public class Main {
 						conta = new TContaBancaria(nomeCliente, CPF, numeroConta, numeroAgencia,valor);
 						boolean contaCriada = listaContas.criarConta(conta);
 						if(contaCriada == true) { 
-							System.out.println("-----------------------------------------------------------------");
+							System.out.println("--------------------------------------------------------------------");
 							System.out.println("Conta criada com sucesso!!!");
 							System.out.println(conta);
 							}
-						
-						System.out.println("---------------------------------------------------------------------");
 						
 						System.out.println("---------------------------------------------------------------------");
 						
@@ -142,55 +128,8 @@ public class Main {
 							int opcaoMenuMovimentacao = 1;
 							do {
 								
-								 System.out.println("----------MENU---------------------------------------------");
-								  System.out.println("	1: Depositar");
-								  System.out.println("	2: Sacar");
-								  System.out.println("	3: Transferir");
-								  System.out.println("	4: Imprimir Saldo");
-								  System.out.println("	5: Sair");
-								  
-								   System.out.print("Informe a operação desejada conforme acima: 1, 2, 3, 4 ou 5: ");
-								   int opcaoMovimentacoes = ler.nextInt();
-								   switch (opcaoMovimentacoes) {
-								   
-										case 1: 
-									solicitaValorDeposito(ler, contaEncontrada);
-											
-											break;
-										case 2: 
-											System.out.print("Digite o valor a ser sacado: ");
-											double valorParaSacar = ler.nextDouble();
-											contaEncontrada.saque(valorParaSacar);
-											
-											break;
-										case 3: 
-											System.out.print("Digite o valor a ser transferido: ");
-											double valorParaTransferir = ler.nextDouble();
-											System.out.print("Digite a conta para transferencia: ");
-											TContaBancaria contaParaTransferencia = listaContas.procurarConta(ler.nextInt());
-											contaEncontrada.transferirValor(valorParaTransferir, contaParaTransferencia);
-
-											
-											break;
-										case 4: 
-											System.out.println("-------------------------------------------------------------");
-											System.out.println(contaEncontrada.toString());
-											System.out.println("-------------------------------------------------------------");
-											System.out.print("clique na tecla p, após enter para prosseguir: ");
-											ler.next();
-											
-
-											break;
-										case 5: 
-											System.out.println("----------------------------------------------------");
-											System.out.println("Voltando ao menu movimentações");
-											System.out.println("----------------------------------------------------");
-											opcaoMenuMovimentacao = 0;
-											break;
-					
-										default:
-											System.out.println("Opção digitada invalida!!!");
-								   }
+								  opcaoMenuMovimentacao = menuMovimentacao(ler, listaContas, contaEncontrada,
+										opcaoMenuMovimentacao);
 							   
 								
 							}while(opcaoMenuMovimentacao == 1);
@@ -209,6 +148,7 @@ public class Main {
 					
 					System.out.println("Lista de contas criadas:");
 					listaContas.imprimirListaContas();
+					System.out.println("-----------------------------------------------------------------------");
 					System.out.print("clique na tecla p, após enter para prosseguir: ");
 					ler.next();					
 					
@@ -226,11 +166,94 @@ public class Main {
 	
 		
 		System.out.println();
-		System.out.println("--------------------------Fim do programa----------------------------------");
+		System.out.println("--------------------------Fim do programa---------------------------------");
 				
 		ler.close();
 		
 
+	}
+
+	private static int menuMovimentacao(Scanner ler, Banco listaContas, TContaBancaria contaEncontrada,
+			int opcaoMenuMovimentacao) {
+		layouMenuMovimentacao();
+		  
+		   int opcaoMovimentacoes = ler.nextInt();
+		   switch (opcaoMovimentacoes) {
+		   
+				case 1: 
+			        solicitaValorDeposito(ler, contaEncontrada);
+					
+					break;
+				case 2: 
+					System.out.print("Digite o valor a ser sacado: ");
+					double valorParaSacar = ler.nextDouble();
+					contaEncontrada.saque(valorParaSacar);
+					
+					break;
+				case 3: 
+					System.out.print("Digite o valor a ser transferido: ");
+					double valorParaTransferir = ler.nextDouble();
+					System.out.print("Digite a conta para transferencia: ");
+					TContaBancaria contaParaTransferencia = listaContas.procurarConta(ler.nextInt());
+					contaEncontrada.transferirValor(valorParaTransferir, contaParaTransferencia);
+
+					
+					break;
+				case 4: 
+					System.out.println("-------------------------------------------------------------");
+					System.out.println(contaEncontrada.toString());
+					System.out.println("-------------------------------------------------------------");
+					System.out.print("clique na tecla p, após enter para prosseguir: ");
+					ler.next();
+					
+
+					break;
+				case 5: 
+					System.out.println("----------------------------------------------------");
+					System.out.println("Voltando ao menu movimentações");
+					System.out.println("----------------------------------------------------");
+					opcaoMenuMovimentacao = 0;
+					break;
+
+				default:
+					System.out.println("Opção digitada invalida!!!");
+		   }
+		return opcaoMenuMovimentacao;
+	}
+
+	private static int lerDadosUsuarioInt(Scanner ler, String mensagemUsuario) {
+		int valor;
+		System.out.print("Digite o numero da conta: ");		
+		valor = ler.nextInt();
+		return valor;
+	}
+
+	private static String lerDadosUsuarioString(Scanner ler, String mensagemUsuario ) {
+		System.out.print(mensagemUsuario);
+		String valor = ler.nextLine();
+		return valor;
+	}
+
+	private static void layouMenuMovimentacao() {
+		System.out.println("----------MENU---------------------------------------------");
+		  System.out.println("	1: Depositar.");
+		  System.out.println("	2: Saca.r");
+		  System.out.println("	3: Transferir.");
+		  System.out.println("	4: Imprimir Saldo.");
+		  System.out.println("	5: Sair.");  
+		  System.out.print("Informe a operação desejada conforme acima: 1, 2, 3, 4 ou 5: ");
+	}
+
+	private static void layouMenuPrincipal() {
+		System.out.println("------------------------ Banco MagalhaesBank-----------------------------");
+		System.out.println();
+		System.out.println("---------------------MENU PRINCIPAL--------------------------------------");
+		System.out.println("1: Criar conta.");
+		System.out.println("2: Movimentação de contas: Sacar,Depositar,transferir e ver saldo.");
+		System.out.println("3: Gerar Relatório geral das contas.");
+		System.out.println("4: Finalizar programa.");
+		System.out.println();
+		System.out.println("--------------------------------------------------------------------------");
 	}
 
 	private static void solicitaValorDeposito(Scanner ler, TContaBancaria contaEncontrada) {
