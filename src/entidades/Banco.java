@@ -35,9 +35,13 @@ public class Banco {
 	}
 	
 	public void imprimirListaContas() {
+		if(qtdItens == 0) {
+			System.out.println("Não existem contas cadastradas!!!");
+		}else {
 		for(int i=0; i < qtdItens ;i++) {
 			System.out.println(listaContas[i].toString());
 			
+		}
 		}
 	}
 	

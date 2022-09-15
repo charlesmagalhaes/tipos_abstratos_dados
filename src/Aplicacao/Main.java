@@ -77,8 +77,7 @@ public class Main {
 						String CPF = lerDadosUsuarioString(ler, "Digite o CPF: ");
 					
 							
-						System.out.print("Digite o valor inicial do deposito: ");
-						valor = ler.nextDouble();
+						valor = lerDadosUsuarioDouble(ler);
 						
 						conta = new TContaBancaria(nomeCliente, CPF, numeroConta, numeroAgencia,valor);
 						boolean contaCriada = listaContas.criarConta(conta);
@@ -173,6 +172,13 @@ public class Main {
 
 	}
 
+	private static Double lerDadosUsuarioDouble(Scanner ler) {
+		Double valor;
+		System.out.print("Digite o valor inicial do deposito: ");
+		valor = ler.nextDouble();
+		return valor;
+	}
+
 	private static int menuMovimentacao(Scanner ler, Banco listaContas, TContaBancaria contaEncontrada,
 			int opcaoMenuMovimentacao) {
 		layouMenuMovimentacao();
@@ -237,7 +243,7 @@ public class Main {
 	private static void layouMenuMovimentacao() {
 		System.out.println("----------MENU---------------------------------------------");
 		  System.out.println("	1: Depositar.");
-		  System.out.println("	2: Saca.r");
+		  System.out.println("	2: Sacar.");
 		  System.out.println("	3: Transferir.");
 		  System.out.println("	4: Imprimir Saldo.");
 		  System.out.println("	5: Sair.");  
